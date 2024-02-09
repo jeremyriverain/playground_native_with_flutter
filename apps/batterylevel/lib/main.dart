@@ -63,7 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _getBatteryLevel,
               child: const Text('Get Battery Level'),
             ),
-            Text(_batteryLevel),
+            Text(
+              _batteryLevel,
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
           ],
         ),
       ),
