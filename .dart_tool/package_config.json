@@ -140,6 +140,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "very_good_analysis",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/very_good_analysis-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "web",
       "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/web-0.3.0",
       "packageUri": "lib/",
@@ -152,7 +158,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-12T06:18:04.881520Z",
+  "generated": "2024-02-12T06:42:23.334522Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
