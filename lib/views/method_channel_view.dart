@@ -11,7 +11,7 @@ class MethodChannelView extends StatefulWidget {
 }
 
 class _MethodChannelViewState extends State<MethodChannelView> {
-  static const platform = MethodChannel('samples.flutter.dev/battery');
+  static const platform = MethodChannel('flutter.demo/battery');
   String _batteryLevel = 'unknown battery level';
 
   Future<void> _getBatteryLevel() async {

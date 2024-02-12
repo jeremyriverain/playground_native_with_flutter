@@ -8,7 +8,9 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-    let batteryChannel = FlutterMethodChannel(name: "samples.flutter.dev/battery",
+
+    // Method Channel Demo (battery level)
+    let batteryChannel = FlutterMethodChannel(name: "flutter.demo/battery",
                                               binaryMessenger: controller.binaryMessenger)
     batteryChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
@@ -18,6 +20,10 @@ import Flutter
       }
       self.receiveBatteryLevel(result: result)
     })
+
+    // Event Channel Demo (timer)
+     let eventChannel = FlutterEventChannel(name: "flutter.demo/timer", binaryMessenger: controller.binaryMessenger)
+    eventChannel.setStreamHandler(TimeHandler())
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -34,4 +40,30 @@ import Flutter
       result(Int(device.batteryLevel * 100))
     }
   }
+
+
+ class TimeHandler: NSObject, FlutterStreamHandler {
+        var timer = Timer()
+        private var eventSink: FlutterEventSink?
+        
+        func onListen(withArguments arguments: Any?, eventSink: @escaping FlutterEventSink) -> FlutterError? {
+            self.eventSink = eventSink
+    
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+                let dateFormat = DateFormatter()
+                    dateFormat.dateFormat = "HH:mm:ss"
+                    let time = dateFormat.string(from: Date())
+                    eventSink(time)
+            })
+            
+        
+            return nil
+        }
+        
+        func onCancel(withArguments arguments: Any?) -> FlutterError? {
+            eventSink = nil
+            return nil
+        }
+    }
 }
+
