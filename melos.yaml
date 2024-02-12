@@ -1,8 +1,0 @@
-name: playground_native_with_flutter
-
-packages:
-  - apps/*
-
-scripts:
-  analyze:
-    exec: dart analyze .
