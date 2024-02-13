@@ -1,5 +1,6 @@
 import 'package:batterylevel/views/event_channel_view.dart';
 import 'package:batterylevel/views/method_channel_view.dart';
+import 'package:batterylevel/views/pigeon_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,7 +34,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentPageIndex = 0;
 
-  final titles = [const Text('Method Channel'), const Text('Event Channel')];
+  final titles = [
+    const Text('Method Channel'),
+    const Text('Event Channel'),
+    const Text(
+      'Pigeon',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.stream),
             label: 'Event Channel',
           ),
+          NavigationDestination(
+            icon: Icon(Icons.airline_stops),
+            label: 'Pigeon',
+          ),
         ],
       ),
       body: [
         const MethodChannelView(),
         const EventChannelView(),
+        const PigeonView(),
       ][currentPageIndex],
     );
   }

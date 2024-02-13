@@ -1,6 +1,12 @@
 import UIKit
 import Flutter
 
+class ExampleApiImpl: ExampleApi {
+  func getPlatformVersion() throws -> String {
+    return "iOS " + UIDevice.current.systemVersion
+  }
+}
+
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -21,9 +27,13 @@ import Flutter
       self.receiveBatteryLevel(result: result)
     })
 
-    // Event Channel Demo (timer)
+    // Event Channel Demo (timer
      let eventChannel = FlutterEventChannel(name: "flutter.demo/timer", binaryMessenger: controller.binaryMessenger)
     eventChannel.setStreamHandler(TimeHandler())
+
+    // Pigeon
+    let exampleApi = ExampleApiImpl()
+    ExampleApiSetup.setUp(binaryMessenger: controller.binaryMessenger, api: exampleApi)
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -66,4 +76,3 @@ import Flutter
         }
     }
 }
-
