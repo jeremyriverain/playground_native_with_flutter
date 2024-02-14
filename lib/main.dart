@@ -1,4 +1,5 @@
 import 'package:batterylevel/views/event_channel_view.dart';
+import 'package:batterylevel/views/ffi_view.dart';
 import 'package:batterylevel/views/method_channel_view.dart';
 import 'package:batterylevel/views/pigeon_view.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
     const Text(
       'Pigeon',
     ),
+    const Text(
+      'FFI',
+    ),
   ];
 
   @override
@@ -69,12 +73,17 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.airline_stops),
             label: 'Pigeon',
           ),
+          NavigationDestination(
+            icon: Icon(Icons.code),
+            label: 'FFI',
+          ),
         ],
       ),
       body: [
         const MethodChannelView(),
         const EventChannelView(),
         const PigeonView(),
+        const FfiView(),
       ][currentPageIndex],
     );
   }
