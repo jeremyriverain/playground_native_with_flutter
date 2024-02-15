@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const MethodChannelView(),
         const EventChannelView(),
         const PigeonView(),
-        const FfiView(),
+        FfiView(),
       ][currentPageIndex],
     );
   }
