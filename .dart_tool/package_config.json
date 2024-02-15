@@ -38,6 +38,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cli_util",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/cli_util-0.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "clock",
       "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
@@ -74,6 +80,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "ffi",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/ffi-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "ffigen",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/ffigen-11.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "file",
       "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/file-7.0.0",
       "packageUri": "lib/",
@@ -108,6 +126,12 @@
       "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/logging-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "matcher",
@@ -148,6 +172,12 @@
     {
       "name": "pub_semver",
       "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/quiver-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -230,13 +260,19 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "yaml_edit",
+      "rootUri": "file:///Users/jeremy/.pub-cache/hosted/pub.dev/yaml_edit-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "batterylevel",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-13T03:56:45.255077Z",
+  "generated": "2024-02-15T15:59:27.629719Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
