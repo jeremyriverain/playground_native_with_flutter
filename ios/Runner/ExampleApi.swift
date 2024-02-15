@@ -48,7 +48,7 @@ class ExampleApiSetup {
   /// The codec used by ExampleApi.
   /// Sets up an instance of `ExampleApi` to handle messages through the `binaryMessenger`.
   static func setUp(binaryMessenger: FlutterBinaryMessenger, api: ExampleApi?) {
-    let getPlatformVersionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.batterylevel.ExampleApi.getPlatformVersion", binaryMessenger: binaryMessenger)
+    let getPlatformVersionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.playgroundnative.ExampleApi.getPlatformVersion", binaryMessenger: binaryMessenger)
     if let api = api {
       getPlatformVersionChannel.setMessageHandler { _, reply in
         do {

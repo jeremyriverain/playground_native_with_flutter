@@ -1,4 +1,4 @@
-import 'package:batterylevel/api/example_api.dart';
+import 'package:playgroundnative/api/example_api.dart';
 import 'package:flutter/material.dart';
 
 class PigeonView extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:batterylevel/views/event_channel_view.dart';
-import 'package:batterylevel/views/ffi_view.dart';
-import 'package:batterylevel/views/method_channel_view.dart';
-import 'package:batterylevel/views/pigeon_view.dart';
+import 'package:playgroundnative/views/event_channel_view.dart';
+import 'package:playgroundnative/views/ffi_view.dart';
+import 'package:playgroundnative/views/method_channel_view.dart';
+import 'package:playgroundnative/views/pigeon_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const MethodChannelView(),
         const EventChannelView(),
         const PigeonView(),
-        FfiView(),
+        const FfiView(),
       ][currentPageIndex],
     );
   }

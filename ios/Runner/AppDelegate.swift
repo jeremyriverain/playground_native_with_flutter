@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import Contacts
 
 class ExampleApiImpl: ExampleApi {
   func getPlatformVersion() throws -> String {
@@ -16,15 +17,15 @@ class ExampleApiImpl: ExampleApi {
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
 
     // Method Channel Demo (battery level)
-    let batteryChannel = FlutterMethodChannel(name: "flutter.demo/battery",
+    let batteryChannel = FlutterMethodChannel(name: "flutter.demo/contacts",
                                               binaryMessenger: controller.binaryMessenger)
     batteryChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-      guard call.method == "getBatteryLevel" else {
+      guard call.method == "getContacts" else {
         result(FlutterMethodNotImplemented)
         return
       }
-      self.receiveBatteryLevel(result: result)
+      self.fetchContacts(result: result)
     })
 
     // Event Channel Demo (timer
@@ -39,17 +40,25 @@ class ExampleApiImpl: ExampleApi {
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
-  private func receiveBatteryLevel(result: FlutterResult) {
-    let device = UIDevice.current
-    device.isBatteryMonitoringEnabled = true
-    if device.batteryState == UIDevice.BatteryState.unknown {
-      result(FlutterError(code: "UNAVAILABLE",
-                          message: "Battery level not available.",
-                          details: nil))
-    } else {
-      result(Int(device.batteryLevel * 100))
+   private func fetchContacts(result: @escaping FlutterResult) {
+        let contactStore = CNContactStore()
+        var contactsArray: [Any] = []
+        
+        let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+
+        do {
+            try contactStore.enumerateContacts(with: CNContactFetchRequest(keysToFetch: keysToFetch)) {
+                (contact, cursor) -> Void in
+                let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
+                contactsArray.append(fullName)
+            }
+            result(contactsArray)
+        } catch {
+            result(FlutterError(code: "Failed to fetch contacts",
+                                 message: error.localizedDescription,
+                                 details: nil))
+        }
     }
-  }
 
 
  class TimeHandler: NSObject, FlutterStreamHandler {

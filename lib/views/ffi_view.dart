@@ -1,49 +1,57 @@
-import 'package:batterylevel/ffi_loader.dart';
+import 'dart:ffi';
+import 'dart:io';
+
+import 'package:playgroundnative/ffi/libhello_generated_bindings.dart'
+    as hello_lib;
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 
-class FfiView extends StatelessWidget {
-  FfiView({
+class FfiView extends StatefulWidget {
+  const FfiView({
     super.key,
   });
 
-  final jsonLoader = MyNativeCJson(pathToJson: 'example.json');
+  @override
+  State<FfiView> createState() => _FfiViewState();
+}
 
-  Future<dynamic> loadJson() {
-    return jsonLoader.load();
+class _FfiViewState extends State<FfiView> {
+  late hello_lib.hello hello;
+
+  @override
+  void initState() {
+    super.initState();
+    final cJSONNative = Platform.isAndroid
+        ? DynamicLibrary.open('libhello.so')
+        : DynamicLibrary.process();
+    hello = hello_lib.hello(cJSONNative);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: loadJson(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Padding(
-            padding: const EdgeInsets.all(15),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'JSON parsed with native library:',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    snapshot.data.toString(),
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ],
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'hello world from C library:',
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              hello
+                  .helloWorld('ffi'.toNativeUtf8().cast<Char>())
+                  .cast<Utf8>()
+                  .toDartString(),
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

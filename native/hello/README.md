@@ -3,8 +3,8 @@
 ## Compile the library
 
 ```bash
-mkdir native/cJSON/build
-cd native/cJSON/build
+mkdir native/hello/build
+cd native/hello/build
 cmake ..
 make
 ```

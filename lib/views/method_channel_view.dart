@@ -11,38 +11,36 @@ class MethodChannelView extends StatefulWidget {
 }
 
 class _MethodChannelViewState extends State<MethodChannelView> {
-  static const platform = MethodChannel('flutter.demo/battery');
-  String _batteryLevel = 'unknown battery level';
+  static const platform = MethodChannel('flutter.demo/contacts');
+  List<String>? _contacts;
 
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
-    try {
-      final result = await platform.invokeMethod<int>('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
-    }
-
+  Future<void> _getContacts() async {
+    final result = await platform.invokeListMethod<String>('getContacts');
     setState(() {
-      _batteryLevel = batteryLevel;
+      _contacts = result;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(
-            onPressed: _getBatteryLevel,
-            child: const Text('Get Battery Level'),
+    return SingleChildScrollView(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: _getContacts,
+                child: const Text('Get contacts'),
+              ),
+              ...(_contacts ?? []).map(
+                (e) => ListTile(
+                  title: Text(e),
+                ),
+              )
+            ],
           ),
-          Text(
-            _batteryLevel,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-        ],
+        ),
       ),
     );
   }

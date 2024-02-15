@@ -1,4 +1,4 @@
-package com.example.batterylevel
+package com.example.playgroundnative
 
 import io.flutter.embedding.android.FlutterActivity
 
