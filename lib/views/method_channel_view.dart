@@ -12,36 +12,27 @@ class MethodChannelView extends StatefulWidget {
 
 class _MethodChannelViewState extends State<MethodChannelView> {
   static const platform = MethodChannel('flutter.demo/contacts');
-  List<String>? _contacts;
 
-  Future<void> _getContacts() async {
-    final result = await platform.invokeListMethod<String>('getContacts');
-    setState(() {
-      _contacts = result;
-    });
+  Future<List<String>?> _getContacts() {
+    return platform.invokeListMethod<String>('getContacts');
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: _getContacts,
-                child: const Text('Get contacts'),
-              ),
-              ...(_contacts ?? []).map(
-                (e) => ListTile(
-                  title: Text(e),
-                ),
-              )
-            ],
+    return FutureBuilder(
+      future: _getContacts(),
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        if (data == null) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return ListView.builder(
+          itemBuilder: (context, index) => ListTile(
+            title: Text(data[index]),
           ),
-        ),
-      ),
+          itemCount: data.length,
+        );
+      },
     );
   }
 }

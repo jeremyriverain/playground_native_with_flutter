@@ -1,10 +1,10 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:playgroundnative/ffi/libhello_generated_bindings.dart'
-    as hello_lib;
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
+import 'package:playgroundnative/ffi/libhello_generated_bindings.dart'
+    as hello_lib;
 
 class FfiView extends StatefulWidget {
   const FfiView({
