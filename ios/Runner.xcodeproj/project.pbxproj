@@ -48,10 +48,6 @@
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
-		3F50EE0E2B7E709300825FAC /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = cJSON.c; path = ../native/cJSON/cJSON.c; sourceTree = "<group>"; };
-		3F50EE102B7E70A200825FAC /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cJSON.h; path = ../native/cJSON/cJSON.h; sourceTree = "<group>"; };
-		3F50EE122B7E70E200825FAC /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = cJSON.c; path = ../native/cJSON/cJSON.c; sourceTree = "<group>"; };
-		3F50EE142B7E70F300825FAC /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cJSON.h; path = ../native/cJSON/cJSON.h; sourceTree = "<group>"; };
 		3F50EE162B7EC3B100825FAC /* hello.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = hello.c; path = ../native/hello/hello.c; sourceTree = "<group>"; };
 		3F50EE182B7EC3CF00825FAC /* hello.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hello.h; path = ../native/hello/hello.h; sourceTree = "<group>"; };
 		3FB4E70D2B7B2513007D5731 /* ExampleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApi.swift; sourceTree = "<group>"; };
@@ -102,10 +98,6 @@
 			children = (
 				3F50EE182B7EC3CF00825FAC /* hello.h */,
 				3F50EE162B7EC3B100825FAC /* hello.c */,
-				3F50EE142B7E70F300825FAC /* cJSON.h */,
-				3F50EE122B7E70E200825FAC /* cJSON.c */,
-				3F50EE102B7E70A200825FAC /* cJSON.h */,
-				3F50EE0E2B7E709300825FAC /* cJSON.c */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -391,6 +383,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -583,6 +576,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = XV7D9WGT3H;
 				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -592,6 +586,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

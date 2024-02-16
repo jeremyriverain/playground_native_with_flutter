@@ -1,5 +1,5 @@
-import 'package:playgroundnative/api/example_api.dart';
 import 'package:flutter/material.dart';
+import 'package:playgroundnative/api/example_api.dart';
 
 class PigeonView extends StatelessWidget {
   const PigeonView({super.key});

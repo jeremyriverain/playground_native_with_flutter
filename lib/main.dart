@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:playgroundnative/views/event_channel_view.dart';
 import 'package:playgroundnative/views/ffi_view.dart';
 import 'package:playgroundnative/views/method_channel_view.dart';
 import 'package:playgroundnative/views/pigeon_view.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentPageIndex = 0;
 
   final titles = [
-    const Text('Method Channel'),
+    const Text('Method Chan.'),
     const Text('Event Channel'),
     const Text(
       'Pigeon',
