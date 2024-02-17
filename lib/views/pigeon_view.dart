@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:playgroundnative/api/example_api.dart';
+import 'package:playgroundnative/api/contacts_api.dart';
 
 class PigeonView extends StatelessWidget {
   const PigeonView({super.key});
 
-  Future<String> getPlatformVersion() {
-    final api = ExampleApi();
-    return api.getPlatformVersion();
+  Future<List<String?>?> _getContacts() {
+    final api = ContactsApi();
+    return api.getContacts();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder(
-        future: getPlatformVersion(),
+        future: _getContacts(),
         builder: (context, snapshot) {
           final data = snapshot.data;
           if (data == null) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
-          return Text(
-            'version: ${snapshot.data}',
-            style: Theme.of(context).textTheme.headlineMedium,
+          return ListView.builder(
+            itemBuilder: (context, index) => ListTile(
+              title: Text(data[index] ?? ''),
+            ),
+            itemCount: data.length,
           );
         },
       ),

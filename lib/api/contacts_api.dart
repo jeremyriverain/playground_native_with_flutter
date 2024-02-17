@@ -15,22 +15,19 @@ PlatformException _createConnectionError(String channelName) {
   );
 }
 
-class ExampleApi {
-  /// Constructor for [ExampleApi].  The [binaryMessenger] named argument is
+class ContactsApi {
+  /// Constructor for [ContactsApi].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
   /// BinaryMessenger will be used which routes to the host platform.
-  ExampleApi({BinaryMessenger? binaryMessenger})
+  ContactsApi({BinaryMessenger? binaryMessenger})
       : __pigeon_binaryMessenger = binaryMessenger;
   final BinaryMessenger? __pigeon_binaryMessenger;
 
-  static const MessageCodec<Object?> pigeonChannelCodec =
-      StandardMessageCodec();
+  static const MessageCodec<Object?> pigeonChannelCodec = StandardMessageCodec();
 
-  Future<String> getPlatformVersion() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.playgroundnative.ExampleApi.getPlatformVersion';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
+  Future<List<String?>> getContacts() async {
+    const String __pigeon_channelName = 'dev.flutter.pigeon.playgroundnative.ContactsApi.getContacts';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
       __pigeon_channelName,
       pigeonChannelCodec,
       binaryMessenger: __pigeon_binaryMessenger,
@@ -51,7 +48,7 @@ class ExampleApi {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (__pigeon_replyList[0] as String?)!;
+      return (__pigeon_replyList[0] as List<Object?>?)!.cast<String?>();
     }
   }
 }

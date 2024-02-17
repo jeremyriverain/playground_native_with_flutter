@@ -39,27 +39,27 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
-protocol ExampleApi {
-  func getPlatformVersion() throws -> String
+protocol ContactsApi {
+  func getContacts() throws -> [String]
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
-class ExampleApiSetup {
-  /// The codec used by ExampleApi.
-  /// Sets up an instance of `ExampleApi` to handle messages through the `binaryMessenger`.
-  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: ExampleApi?) {
-    let getPlatformVersionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.playgroundnative.ExampleApi.getPlatformVersion", binaryMessenger: binaryMessenger)
+class ContactsApiSetup {
+  /// The codec used by ContactsApi.
+  /// Sets up an instance of `ContactsApi` to handle messages through the `binaryMessenger`.
+  static func setUp(binaryMessenger: FlutterBinaryMessenger, api: ContactsApi?) {
+    let getContactsChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.playgroundnative.ContactsApi.getContacts", binaryMessenger: binaryMessenger)
     if let api = api {
-      getPlatformVersionChannel.setMessageHandler { _, reply in
+      getContactsChannel.setMessageHandler { _, reply in
         do {
-          let result = try api.getPlatformVersion()
+          let result = try api.getContacts()
           reply(wrapResult(result))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      getPlatformVersionChannel.setMessageHandler(nil)
+      getContactsChannel.setMessageHandler(nil)
     }
   }
 }

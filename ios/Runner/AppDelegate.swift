@@ -2,12 +2,6 @@ import UIKit
 import Flutter
 import Contacts
 
-class ExampleApiImpl: ExampleApi {
-  func getPlatformVersion() throws -> String {
-    return "iOS " + UIDevice.current.systemVersion
-  }
-}
-
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -16,7 +10,7 @@ class ExampleApiImpl: ExampleApi {
 
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
 
-    // Method Channel Demo (battery level)
+    // Method Channel Demo
     let batteryChannel = FlutterMethodChannel(name: "flutter.demo/contacts",
                                               binaryMessenger: controller.binaryMessenger)
     batteryChannel.setMethodCallHandler({
@@ -33,8 +27,8 @@ class ExampleApiImpl: ExampleApi {
     eventChannel.setStreamHandler(TimeHandler())
 
     // Pigeon
-    let exampleApi = ExampleApiImpl()
-    ExampleApiSetup.setUp(binaryMessenger: controller.binaryMessenger, api: exampleApi)
+    let contactsApi = ContactsApiImpl()
+    ContactsApiSetup.setUp(binaryMessenger: controller.binaryMessenger, api: contactsApi)
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
