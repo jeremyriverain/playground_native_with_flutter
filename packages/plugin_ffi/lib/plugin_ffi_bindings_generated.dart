@@ -52,19 +52,16 @@ class PluginFfiBindings {
   /// Do not call these kind of native functions in the main isolate. They will
   /// block Dart execution. This will cause dropped frames in Flutter applications.
   /// Instead, call these native functions on a separate isolate.
-  int sum_long_running(
+  int fibonacci(
     int a,
-    int b,
   ) {
-    return _sum_long_running(
+    return _fibonacci(
       a,
-      b,
     );
   }
 
-  late final _sum_long_runningPtr =
-      _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.IntPtr, ffi.IntPtr)>>(
-          'sum_long_running');
-  late final _sum_long_running =
-      _sum_long_runningPtr.asFunction<int Function(int, int)>();
+  late final _fibonacciPtr =
+      _lookup<ffi.NativeFunction<ffi.UnsignedLongLong Function(ffi.Int)>>(
+          'fibonacci');
+  late final _fibonacci = _fibonacciPtr.asFunction<int Function(int)>();
 }

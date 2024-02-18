@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_ffi/plugin_ffi.dart' as plugin_ffi;
 
@@ -14,42 +15,65 @@ class _FfiViewState extends State<FfiView> {
   late int sumResult;
   late Future<int> sumAsyncResult;
 
+  final fibonacciInput = 40;
+
   @override
   void initState() {
     super.initState();
     sumResult = plugin_ffi.sum(1, 2);
-    sumAsyncResult = plugin_ffi.sumAsync(3, 4);
+    sumAsyncResult = plugin_ffi.fibonacci(fibonacciInput);
   }
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(fontSize: 25);
-    const spacerSmall = SizedBox(height: 10);
     return Container(
       padding: const EdgeInsets.all(10),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'This calls a native function through FFI that is shipped as source in the package. '
-            'The native code is built as part of the Flutter Runner build.',
-            style: textStyle,
-            textAlign: TextAlign.center,
-          ),
-          spacerSmall,
           Text(
             'sum(1, 2) = $sumResult',
-            style: textStyle,
+            style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          spacerSmall,
+          const SizedBox(
+            height: 60,
+          ),
           FutureBuilder<int>(
             future: sumAsyncResult,
             builder: (BuildContext context, AsyncSnapshot<int> value) {
-              final displayValue = (value.hasData) ? value.data : 'loading';
-              return Text(
-                'await sumAsync(3, 4) = $displayValue',
-                style: textStyle,
-                textAlign: TextAlign.center,
+              final data = value.data;
+              if (value.hasError) {
+                if (kDebugMode) {
+                  print(value.error);
+                }
+                return const Text('An error occured');
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'await fibonacci($fibonacciInput) =',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  if (data == null)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    )
+                  else
+                    Text(
+                      data.toString(),
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                ],
               );
             },
           ),

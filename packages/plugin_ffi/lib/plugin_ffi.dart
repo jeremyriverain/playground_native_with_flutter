@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
@@ -23,10 +22,10 @@ int sum(int a, int b) => _bindings.sum(a, b);
 ///
 /// 1. Reuse a single isolate for various different kinds of requests.
 /// 2. Use multiple helper isolates for parallel execution.
-Future<int> sumAsync(int a, int b) async {
+Future<int> fibonacci(int a) async {
   final SendPort helperIsolateSendPort = await _helperIsolateSendPort;
   final int requestId = _nextSumRequestId++;
-  final _SumRequest request = _SumRequest(requestId, a, b);
+  final _SumRequest request = _SumRequest(requestId, a);
   final Completer<int> completer = Completer<int>();
   _sumRequests[requestId] = completer;
   helperIsolateSendPort.send(request);
@@ -52,16 +51,14 @@ final DynamicLibrary _dylib = () {
 /// The bindings to the native functions in [_dylib].
 final PluginFfiBindings _bindings = PluginFfiBindings(_dylib);
 
-
 /// A request to compute `sum`.
 ///
 /// Typically sent from one isolate to another.
 class _SumRequest {
   final int id;
   final int a;
-  final int b;
 
-  const _SumRequest(this.id, this.a, this.b);
+  const _SumRequest(this.id, this.a);
 }
 
 /// A response with the result of `sum`.
@@ -113,7 +110,7 @@ Future<SendPort> _helperIsolateSendPort = () async {
       ..listen((dynamic data) {
         // On the helper isolate listen to requests and respond to them.
         if (data is _SumRequest) {
-          final int result = _bindings.sum_long_running(data.a, data.b);
+          final int result = _bindings.fibonacci(data.a);
           final _SumResponse response = _SumResponse(data.id, result);
           sendPort.send(response);
           return;
