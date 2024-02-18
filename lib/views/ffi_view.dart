@@ -21,10 +21,10 @@ class _FfiViewState extends State<FfiView> {
   @override
   void initState() {
     super.initState();
-    final cJSONNative = Platform.isAndroid
+    final helloNative = Platform.isAndroid
         ? DynamicLibrary.open('libhello.so')
         : DynamicLibrary.process();
-    hello = hello_lib.hello(cJSONNative);
+    hello = hello_lib.hello(helloNative);
   }
 
   @override
@@ -35,13 +35,6 @@ class _FfiViewState extends State<FfiView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'hello world from C library:',
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
             Text(
               hello
                   .helloWorld('ffi'.toNativeUtf8().cast<Char>())

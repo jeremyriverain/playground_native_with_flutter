@@ -1,11 +1,11 @@
-# dart run ffigen --config libhello.config.yaml
+# dart run ffigen --config ffigen/libhello.config.yaml
 
-output: 'lib/ffi/libhello_generated_bindings.dart'
+output: '../lib/ffi/libhello_generated_bindings.dart'
 name: 'hello'
 description: 'Holds bindings to hello library.'
 headers:
   entry-points:
-    - 'native/hello/hello.h'
+    - '../native/hello/hello.h'
   include-directives:
     - '**hello.h'
 comments: false
