@@ -1,6 +1,5 @@
 import UIKit
 import Flutter
-import Contacts
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -19,10 +18,11 @@ import Contacts
         result(FlutterMethodNotImplemented)
         return
       }
-      self.fetchContacts(result: result)
+      let contactsService = ContactsService()
+      contactsService.fetchContacts(result: result)
     })
 
-    // Event Channel Demo (timer
+    // Event Channel Demo (timer)
      let eventChannel = FlutterEventChannel(name: "flutter.demo/timer", binaryMessenger: controller.binaryMessenger)
     eventChannel.setStreamHandler(TimeHandler())
 
@@ -33,26 +33,6 @@ import Contacts
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-    
-   private func fetchContacts(result: @escaping FlutterResult) {
-        let contactStore = CNContactStore()
-        var contactsArray: [Any] = []
-        
-        let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
-
-        do {
-            try contactStore.enumerateContacts(with: CNContactFetchRequest(keysToFetch: keysToFetch)) {
-                (contact, cursor) -> Void in
-                let fullName = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
-                contactsArray.append(fullName)
-            }
-            result(contactsArray)
-        } catch {
-            result(FlutterError(code: "Failed to fetch contacts",
-                                 message: error.localizedDescription,
-                                 details: nil))
-        }
-    }
 
 
  class TimeHandler: NSObject, FlutterStreamHandler {
