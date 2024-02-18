@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +20,7 @@ class _FfiViewState extends State<FfiView> {
   @override
   void initState() {
     super.initState();
-    final helloNative = Platform.isAndroid
-        ? DynamicLibrary.open('libhello.so')
-        : DynamicLibrary.process();
+    final helloNative = DynamicLibrary.process();
     hello = hello_lib.hello(helloNative);
   }
 
