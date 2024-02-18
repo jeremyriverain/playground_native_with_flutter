@@ -1,9 +1,11 @@
-# Playground native with Flutter
+# Native playground with Flutter
 
-iOS only.
+iOS only
 
-## Run the app in dev mode
+## Installation
 
 ```bash
-flutter run
+dart pub global activate melos
+flutter pub get
+melos bootstrap
 ```
