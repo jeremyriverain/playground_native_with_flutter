@@ -1,46 +1,59 @@
-import 'dart:ffi';
+import 'dart:async';
 
-import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:playgroundnative/ffi/libhello_generated_bindings.dart'
-    as hello_lib;
+import 'package:plugin_ffi/plugin_ffi.dart' as plugin_ffi;
 
 class FfiView extends StatefulWidget {
-  const FfiView({
-    super.key,
-  });
+  const FfiView({super.key});
 
   @override
   State<FfiView> createState() => _FfiViewState();
 }
 
 class _FfiViewState extends State<FfiView> {
-  late hello_lib.hello hello;
+  late int sumResult;
+  late Future<int> sumAsyncResult;
 
   @override
   void initState() {
     super.initState();
-    final helloNative = DynamicLibrary.process();
-    hello = hello_lib.hello(helloNative);
+    sumResult = plugin_ffi.sum(1, 2);
+    sumAsyncResult = plugin_ffi.sumAsync(3, 4);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              hello
-                  .helloWorld('ffi'.toNativeUtf8().cast<Char>())
-                  .cast<Utf8>()
-                  .toDartString(),
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+    const textStyle = TextStyle(fontSize: 25);
+    const spacerSmall = SizedBox(height: 10);
+    return Container(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          const Text(
+            'This calls a native function through FFI that is shipped as source in the package. '
+            'The native code is built as part of the Flutter Runner build.',
+            style: textStyle,
+            textAlign: TextAlign.center,
+          ),
+          spacerSmall,
+          Text(
+            'sum(1, 2) = $sumResult',
+            style: textStyle,
+            textAlign: TextAlign.center,
+          ),
+          spacerSmall,
+          FutureBuilder<int>(
+            future: sumAsyncResult,
+            builder: (BuildContext context, AsyncSnapshot<int> value) {
+              final displayValue = (value.hasData) ? value.data : 'loading';
+              return Text(
+                'await sumAsync(3, 4) = $displayValue',
+                style: textStyle,
+                textAlign: TextAlign.center,
+              );
+            },
+          ),
+        ],
       ),
     );
   }

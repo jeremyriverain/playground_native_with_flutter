@@ -23,7 +23,10 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
 
       - name: Install
-        run: flutter pub get
+        run: |
+          dart pub global activate melos
+          flutter pub get
+          melos bootstrap
 
       - name: Lint
-        run: flutter analyze
+        run: melos exec -- "flutter analyze"
