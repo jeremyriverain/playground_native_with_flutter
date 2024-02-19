@@ -1,4 +1,4 @@
-package com.example.batterylevel
+package com.example.playgroundnative
 
 import android.annotation.SuppressLint
 import android.os.Handler
