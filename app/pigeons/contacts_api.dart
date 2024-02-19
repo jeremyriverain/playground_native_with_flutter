@@ -9,6 +9,9 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/api/contacts_api.dart',
     swiftOut: 'ios/Runner/ContactsApi.swift',
     swiftOptions: SwiftOptions(),
+    kotlinOut:
+        'android/app/src/main/kotlin/com/example/playgroundnative/ContactsApi.kt',
+    kotlinOptions: KotlinOptions(),
   ),
 )
 @HostApi()

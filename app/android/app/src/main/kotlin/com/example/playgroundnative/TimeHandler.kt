@@ -7,7 +7,7 @@ import io.flutter.plugin.common.EventChannel
 import java.text.SimpleDateFormat
 import java.util.Date
 
-object TimeHandler : EventChannel.StreamHandler {
+class TimeHandler(): EventChannel.StreamHandler {
     // Handle event in main thread.
     private var handler = Handler(Looper.getMainLooper())
 

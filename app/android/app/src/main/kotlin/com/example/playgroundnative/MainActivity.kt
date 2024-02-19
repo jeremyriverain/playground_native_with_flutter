@@ -1,12 +1,11 @@
 package com.example.playgroundnative
 
+import ContactsApi
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.playgroundnative.TimeHandler
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
@@ -37,15 +36,15 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, contactChannel).setMethodCallHandler {
                 call, result ->
             if (call.method == "getContacts") {
                 try {
-                    val contactsService = ContactsService(context);
-                    result.success(contactsService.fetchContacts());
+                    val contactsService = ContactsService(context)
+                    result.success(contactsService.fetchContacts())
                 } catch (e: Error) {
                     result.error("An error occured", "Impossible to fetch contacts.", null)
                 }
@@ -54,8 +53,17 @@ class MainActivity : FlutterActivity() {
             }
         }
 
+        val timeHandler = TimeHandler()
+
         EventChannel(flutterEngine.dartExecutor.binaryMessenger, timerEventChannel).setStreamHandler(
-            TimeHandler
+            timeHandler
+        )
+
+        val contactsApi = ContactsApiImpl(context)
+
+        ContactsApi.setUp(
+            binaryMessenger = flutterEngine.dartExecutor.binaryMessenger,
+            api = contactsApi
         )
     }
 }
