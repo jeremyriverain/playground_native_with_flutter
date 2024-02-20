@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "event_channel",
+  "steps": [
+    {
+      "file": "app/lib/views/event_channel_view.dart",
+      "description": "Côté Flutter, je définis un EventChannel. Comme pour MethodChannel, le nom doit être unique sur le projet et identique à ce qui est renseigné côté natif.",
+      "line": 7
+    },
+    {
+      "file": "app/lib/views/event_channel_view.dart",
+      "description": "Ensuite, on se met à l'écoute d'un flux.",
+      "line": 9
+    },
+    {
+      "file": "app/lib/views/event_channel_view.dart",
+      "description": "On utilise le widget StreamBuilder pour afficher l'information reçue.",
+      "line": 18
+    },
+    {
+      "file": "app/ios/Runner/AppDelegate.swift",
+      "description": "Côté iOS, on créé un EventChannel dont le nom doit être identique à celui renseigné dans Flutter.\n\nOn implémente ensuite une classe pour transmettre le flux d'informations à Flutter.",
+      "line": 26
+    },
+    {
+      "file": "app/ios/Runner/TimeHandler.swift",
+      "description": "La méthode onListen implémente le stream en tant que tel",
+      "line": 7
+    },
+    {
+      "file": "app/ios/Runner/TimeHandler.swift",
+      "description": "la méthode onCancel permet de faire du nettoyage et de supprimer les effets de bord induits par la création d'un stream",
+      "line": 21
+    }
+  ],
+  "ref": "develop"
+}

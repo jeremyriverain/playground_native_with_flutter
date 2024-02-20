@@ -1,0 +1,32 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "method channel",
+  "steps": [
+    {
+      "file": "app/lib/views/method_channel_view.dart",
+      "description": "Côté Flutter, on définit un canal de communication au moyen de MethodChannel. On donne un nom au canal. Le nom doit être unique",
+      "line": 14
+    },
+    {
+      "file": "app/lib/views/method_channel_view.dart",
+      "description": "on invoque une méthode, en renseignant son nom et d'éventuels arguments",
+      "line": 19
+    },
+    {
+      "file": "app/ios/Runner/AppDelegate.swift",
+      "description": "Côté iOS, on définit également un MethodChannel. Le nom doit être le même que dans Flutter.\n\nOn implémente ensuite la méthode getContacts.",
+      "line": 12
+    },
+    {
+      "file": "app/ios/Runner/ContactsService.swift",
+      "description": "La classe ContactsService est utilisée pour la récupération des contacts du téléphone.",
+      "line": 4
+    },
+    {
+      "file": "app/android/app/src/main/kotlin/com/example/playgroundnative/MainActivity.kt",
+      "description": "Même chose, côté Android. On définit un MethodChannel. Le nom doit être identique que le nom renseigné dans Flutter.",
+      "line": 42
+    }
+  ],
+  "ref": "develop"
+}

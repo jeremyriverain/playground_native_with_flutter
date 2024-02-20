@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "pigeon",
+  "steps": [
+    {
+      "file": "app/pubspec.yaml",
+      "description": "on ajoute pigeon en dépendance. https://pub.dev/packages/pigeon",
+      "line": 48
+    },
+    {
+      "file": "app/pigeons/contacts_api.dart",
+      "description": "On définit ensuite nos API, en modélisant les différentes méthodes et propriétés que fournira la plateforme native.\n\nOn renseigne au moyen d'annotations les fichiers de destination. Dans l'exemple ci-dessous, les fichiers de bindings pour iOS et Android sont générés automatiquement.",
+      "line": 5
+    },
+    {
+      "file": "app/pigeons/contacts_api.dart",
+      "description": "on fait tourner pigeon en lui demander de générer tout le code boilerplate.",
+      "line": 3
+    },
+    {
+      "file": "app/lib/api/contacts_api.dart",
+      "description": "pigeon génère ensuite pour nous toute la glue nécessaire pour que la communication entre Dart / iOS et Dart / Android soit correctement typée.\n\nici la génération de code côté Dart",
+      "line": 1
+    },
+    {
+      "file": "app/ios/Runner/ContactsApi.swift",
+      "description": "ici la génération de code côté iOS",
+      "line": 1
+    },
+    {
+      "file": "app/ios/Runner/ContactsApiImpl.swift",
+      "description": "ensuite, pour chaque plateforme supportée, on implémente une interface préalablement générée par pigeon. Ici, on implémente l'interface ContactsApi, en particulier la méthode getContacts",
+      "line": 1
+    },
+    {
+      "file": "app/ios/Runner/AppDelegate.swift",
+      "description": "On utilise ici ContactsApiSetup (généré par pigeon) pour enregistrer notre PlatformChannel.",
+      "line": 30
+    }
+  ],
+  "ref": "develop"
+}

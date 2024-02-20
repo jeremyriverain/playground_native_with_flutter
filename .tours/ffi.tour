@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "ffi",
+  "steps": [
+    {
+      "file": "packages/plugin_ffi/src/plugin_ffi.c",
+      "description": "premièrement, on rédige du code en C. ici, 2 fonctions sont exposées: sum et fibonacci",
+      "line": 1
+    },
+    {
+      "file": "packages/plugin_ffi/lib/plugin_ffi_bindings_generated.dart",
+      "description": "Après avoir exécuté la commande \"dart run ffigen --config ffigen.yaml\", ce fichier est généré. Il fait la glue entre le code Dart et le code en C.",
+      "line": 1
+    },
+    {
+      "file": "packages/plugin_ffi/lib/plugin_ffi.dart",
+      "description": "Ici, l'API utilise le code généré par ffigen pour exposer une API simple à utiliser.\n\nLa méthode fibonacci est wrappée dans un Isolate afin de ne pas bloquer le thread principal de Dart",
+      "line": 25
+    },
+    {
+      "file": "app/pubspec.yaml",
+      "description": "enfin, depuis Flutter, on ajoute le plugin en dépendance.",
+      "line": 35
+    },
+    {
+      "file": "packages/plugin_ffi/pubspec.yaml",
+      "description": "présence de ffi et ffigen en dépendance. \n\nffigen est un outil de génération de code facilitant l'interopérabilité de code C avec Dart.",
+      "line": 16
+    },
+    {
+      "file": "packages/plugin_ffi/ffigen.yaml",
+      "description": "ajout d'un fichier de configuration pour ffigen, décrivant les API en C qu'on souhaite invoquer depuis Dart",
+      "line": 1
+    }
+  ],
+  "ref": "develop"
+}
